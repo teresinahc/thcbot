@@ -21,7 +21,7 @@ async def on_chat_message(msg):
 
     if content_type == 'new_chat_member':
         if msg['new_chat_member']['id'] == BOT_ID:
-            await bot.sendMessage(chat_id, 'Hey pessoal do <strong>' + msg['chat']['title'] + '</strong>! ' + (u'\U0001f596') + '\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a><code>\nObriago ao </code><strong>'+msg['from']['first_name']+'</strong> por me adicionar.\nUsem os comandos ou enviem "/menu"! ' + (u'\U0001f603'), parse_mode='HTML')
+            await bot.sendMessage(chat_id, 'Hey pessoal do <strong>' + msg['chat']['title'] + '</strong>! ' + (u'\U0001f596') + '\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a>\nObriago ao <strong>'+msg['from']['first_name']+'</strong> por me adicionar.\nUsem os comandos ou enviem "/menu"! ' + (u'\U0001f603'), parse_mode='HTML')
         else:
             await bot.sendMessage(chat_id,'Hey <strong>' + msg['new_chat_member']['first_name'] + '</strong>! '+(u'\U0001f596')+'\nSeja bem-vind@ ao <strong>' + msg['chat']['title'] + '</strong>!\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a>!\nUse os comandos ou envie "/menu"! ' + (u'\U0001f603'), parse_mode='HTML')
         return
@@ -76,11 +76,11 @@ async def on_callback_query(msg):
         await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, o Teresina Hacker Clube fica bem aqui:", parse_mode='HTML')
         await bot.sendLocation(chat_id, -5.088308, -42.810024)
     elif query_data == "Projetos":
-        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong><code>, projetos do Teresina Hacker Clube:</code>\n\n" + get_projetos(), parse_mode='HTML')
+        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, projetos do Teresina Hacker Clube:\n\n" + get_projetos(), parse_mode='HTML')
     elif query_data == "Agenda":
-        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong><code>, agenda semanal do Teresina Hacker Clube:</code>\n" + get_agenda(), parse_mode='HTML')
+        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, agenda semanal do Teresina Hacker Clube:\n" + get_agenda(), parse_mode='HTML')
     elif query_data == "Eventos":
-        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong><code>, eventos do Teresina Hacker Clube:</code>\n" + get_eventos(), parse_mode='HTML')
+        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, eventos do Teresina Hacker Clube:\n" + get_eventos(), parse_mode='HTML')
 
 
 
