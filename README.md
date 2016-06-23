@@ -30,11 +30,6 @@ Como executar
     * `mkvirtualenv botenv` para criar um virtualenv chamado botenv
     * `workon botenv` para ativar o virtualenv sempre que for trabalhar no projeto
 
-2. Abra o arquivo `bot.py` e adicione o ID do seu bot em `BOT_ID=6666666`
+2. Renomeie o arquivo `settings.template.py` para `settings.py`, adicione a TOKEN do bot em `TELEGRAM_API_KEY = ''` e ID do seu bot em `BOT_ID = 6666666`
 
-3. Inicie o bot com a token via linha de comando
-    * `python3.5 bot.py AQUI_VOCÊ_ADICIONA_A_TOKEN_DO_BOT`
-
-4. Ou substitua `sys.argv[1]` por sua TOKEN no arquivo `bot.py` em:
-    * `TOKEN = AQUI_VOCÊ_ADICIONA_A_TOKEN_DO_BOT`
-    * Daí inicie o bot `python3.5 bot.py`
+3. Inicie o bot com `python bot.py`
