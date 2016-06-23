@@ -1,0 +1,6 @@
+__pycache__/
+env/
+chat_id
+chat_ids
+settings.py
+*.pyc
