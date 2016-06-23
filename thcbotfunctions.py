@@ -1,10 +1,21 @@
 # -*- coding: UTF-8 -*-
 import re
+import os
 import urllib.request, urllib.error, urllib.parse
 
 hdr = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11'}
 
-def getStatus():
+#		Grava o id de todo chat iniciado com o bot
+def save_id(chat_id):
+	f = open("chat_ids", "r+")
+	if str(chat_id) not in f.read():
+		f.write(str(chat_id)+"\n")
+		f.close()
+	else:
+		f.close()
+
+#		Retorna o status do THC (aberto/fechado) de acordo com o que estiver setado na wiki.
+def get_status():
 	url = "http://teresinahc.org/wiki/index.php/P%C3%A1gina_principal"
 	f = urllib.request.Request(url, headers = hdr)
 	try:
@@ -16,28 +27,12 @@ def getStatus():
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar o status do THC!'
 
+#		Gambiarra pra fazer login na Wiki do THC
+def set_status(list_com):
+	return os.popen('python gamb.py '+list_com[0]+' '+list_com[1]+' '+list_com[2]).read()
 
-def setStatus(list_com):
-	status = "On.png" if list_com[0] == "/open" else "Off.png"
-	login = list_com[1]
-	passwd = list_com[2]
-
-	url = 'http://teresinahc.org/wiki/index.php?title=Especial:Autenticar-se&returnto=P%C3%A1gina+principal'
-	values = {'wpName':login,
-			'wpPassword':passwd}
-	
-	data = urllib.parse.urlencode(values)
-	data = bytes(data, 'ascii')
-
-	req = urllib.request.Request(url, data, hdr)
-	with urllib.request.urlopen(req) as response:
-		the_page = response.read()
-	f=open("site.html", "w")
-	f.write(the_page.decode('utf-8'))
-	f.close()
-
-
-def getAgenda():
+#		Retorna a agenda do THC (aberto/fechado) de acordo com o que estiver setado na wiki.	
+def get_agenda():
 	url = "http://teresinahc.org/wiki/index.php/Agenda_Semanal"
 	f = urllib.request.Request(url, headers = hdr)
 	try:
@@ -50,8 +45,8 @@ def getAgenda():
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar a agenda semanal do THC!'
 
-
-def getProjetos():
+#		Retorna os projetos do THC (aberto/fechado) de acordo com o que estiver setado na wiki.
+def get_projetos():
 	url = "http://teresinahc.org/wiki/index.php/Projetos"
 	f = urllib.request.Request(url, headers = hdr)
 	try:
@@ -71,7 +66,8 @@ def getProjetos():
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar os projetos do THC!'
 
-def getEventos():
+#		Retorna os eventos do THC (aberto/fechado) de acordo com o que estiver setado na wiki.
+def get_eventos():
 	url = "http://teresinahc.org/wiki/index.php/Pr%C3%B3ximos_Eventos"
 	f = urllib.request.Request(url, headers = hdr)
 	try:
@@ -82,49 +78,4 @@ def getEventos():
 		result = result.replace("<li>","  "+u'\U0001f449'+" ")
 		return result.replace("</strike>","").replace("</li>", "")
 	except urllib.error.HTTPError:
-		return 'Ocorreu um erro ao tentar verificar os eventos do THC!'	
-
-
-setStatus(["/close", "philippeoz", "55363300"])
-# print(getEventos())
-# def toggleStatus(login, passwd, status):
-# 	global url, hdr
-
-# 	br = Browser()
-
-# 	br.set_handle_robots(False)
-# 	br.addheaders = [('User-agent', 'Firefox')]
-# 	br.open(url)
-
-# 	if 'Autenticar-se' in br.response().read():
-# 		br.select_form('userlogin')
-# 		br.form['wpName'] = login
-# 		br.form['wpPassword'] = passwd
-# 		br.submit()
-# 		pag = br.response().read()
-# 		if '"wgUserName":null' not in pag:
-# 			br.open('http://teresinahc.org/wiki/index.php?title=Status&action=edit')
-# 			if 'value="Salvar página"' in br.response().read():
-# 				br.select_form('editform')
-# 				stat=''
-# 				if status:
-# 					stat='On'
-# 				else:
-# 					stat='Off'
-# 				br.form['wpTextbox1'] = '<center>[[Arquivo:'+stat+'.png]]</center>'
-# 				br.submit(name='wpSave')
-# 				br.close()
-# 				if status:
-# 					return 'O Teresina Hacker Clube no momento está ABERTO!'
-# 				else:
-# 					return 'O Teresina Hacker Clube no momento está FECHADO!'
-# 			else:
-# 				br.close()
-# 				return 'Você não tem permissão para alterar páginas da Wiki do Teresina Hacker Clube'
-# 		else:
-# 			br.close()
-# 			output  = re.compile('<div class="errorbox">(.*?)</div>', re.DOTALL |  re.IGNORECASE).findall(pag)
-# 			return output[0].replace("<br />", "").replace("\t", "")
-# 	else:
-# 		br.close()
-# 		return 'Desculpe, por algum motivo não foi possível acessar a Wiki do Teresina Hacker Clube.'
+		return 'Ocorreu um erro ao tentar verificar os eventos do THC!'
