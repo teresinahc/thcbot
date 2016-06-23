@@ -8,7 +8,7 @@ Bot do Teresina Hacker Clube :)
 Utilizamos no desenvolvimento
 ---
 
-* [telepot - Python framework for Telegram Bot API](https://github.com/nickoala/telepot" target="_blank)
+* [telepot - Python framework for Telegram Bot API](https://github.com/nickoala/telepot)
 * Python 3.5 e 2.7 ^^'
 
 ---
