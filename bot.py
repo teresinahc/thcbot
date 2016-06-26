@@ -23,7 +23,10 @@ async def on_chat_message(msg):
         if msg['new_chat_member']['id'] == BOT_ID:
             await bot.sendMessage(chat_id, 'Hey pessoal do <strong>' + msg['chat']['title'] + '</strong>! ' + (u'\U0001f596') + '\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a>\nObriago ao <strong>'+msg['from']['first_name']+'</strong> por me adicionar.\nUsem os comandos ou enviem "/menu"! ' + (u'\U0001f603'), parse_mode='HTML')
         else:
-            await bot.sendMessage(chat_id,'Hey <strong>' + msg['new_chat_member']['first_name'] + '</strong>! '+(u'\U0001f596')+'\nSeja bem-vind@ ao <strong>' + msg['chat']['title'] + '</strong>!\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a>!\nUse os comandos ou envie "/menu"! ' + (u'\U0001f603'), parse_mode='HTML')
+            await bot.sendMessage(chat_id,'Hey <strong>' + msg['new_chat_member']['first_name'] +\
+             '</strong>! '+(u'\U0001f596')+'\nSeja bem-vind@ ao <strong>' + msg['chat']['title'] +\
+              '</strong>!\nSou o THCbot!\nBot do <a href="http://teresinahc.org/">Teresina Hacker Clube</a>!\nUse os comandos ou envie "/menu"! ' +\
+               (u'\U0001f603') +("\nLembrando que novatos pagam PIZZA!! "+(u'\U0001f355') if chat_id==-1001031289268 else ""), parse_mode='HTML')
         return
 
     if ('/open' in command or '/close' in command) and chat_type != 'private':
