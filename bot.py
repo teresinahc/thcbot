@@ -76,7 +76,10 @@ async def on_callback_query(msg):
         await bot.answerCallbackQuery(query_id,first_name+", " + get_status(),show_alert=True)
         await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, " + get_status(), parse_mode='HTML')
     elif query_data == 'Local':
-        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, o Teresina Hacker Clube fica bem aqui:", parse_mode='HTML')
+        await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, o Teresina Hacker Clube fica na Rua Arlindo Nogueira, "+\
+            "entre as ruas Coelho Rodrigues e Álvaro Mendes.\nAtrás da Biblioteca Pública Estadual Desembargador Cromwell de Carvalho, "+\
+            "na antiga Estação Digital.", parse_mode='HTML')
+        await bot.sendPhoto(chat_id, 'AgADAQAD87QxG_FKAgW731ne1kvXJ2CC5y8ABIgtN6sewlMVMsUAAgI')
         await bot.sendLocation(chat_id, -5.088308, -42.810024)
     elif query_data == "Projetos":
         await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, projetos do Teresina Hacker Clube:\n\n" + get_projetos(), parse_mode='HTML')
