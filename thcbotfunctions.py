@@ -60,7 +60,7 @@ def get_projetos():
 			cleantext = cleantext.replace("> ", ">").replace("/wiki","http://teresinahc.org/wiki")
 			cleantext = cleantext.replace("</a>\n</td>\n<td>", "</a> - ")
 			cleantext = cleantext.replace("\n</td>\n<td>"," - ")
-			cleantext = cleantext.replace("</td>","")
+			cleantext = cleantext.replace("</td>","").replace('<b>', '').replace('</b>', '')
 			outputxt+=u'\U0001f449'+" "+cleantext
 		return outputxt
 	except urllib.error.HTTPError:
@@ -73,9 +73,15 @@ def get_eventos():
 	try:
 		page = urllib.request.urlopen(f)
 		txt = page.read().decode('utf-8')
-		output  = re.compile('mw-content-ltr"><ul>(.*?)\n\n', re.DOTALL |  re.IGNORECASE).findall(txt)
-		result = output[0].replace("<ul>","").replace("</ul>","").replace("<strike>", u'\u2705'+" ")
-		result = result.replace("<li>","  "+u'\U0001f449'+" ")
-		return result.replace("</strike>","").replace("</li>", "")
+		output  = re.compile('mw-content-ltr"><ul>(.*?)</ul>\n\n', re.DOTALL |  re.IGNORECASE).findall(txt)
+		output  = re.compile('<li>(.*?)</li>', re.DOTALL |  re.IGNORECASE).findall(txt)
+		txt = ''
+		for i in output:
+			txt = txt+" "+u'\U0001f449'+" "+i+"\n" if not '<strike>' in i else ""
+		# result = output[0].replace("<ul>","").replace("</ul>","").replace("<strike>", u'\u2705'+" ")
+		# result = result.replace("<li>","  "+u'\U0001f449'+" ")
+		# return result.replace("</strike>","").replace("</li>", "")
+		return txt
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar os eventos do THC!'
+
