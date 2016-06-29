@@ -21,9 +21,9 @@ def get_status():
 	try:
 		page = urllib.request.urlopen(f)
 		if 'Off.png' in page.read().decode('utf-8'):
-			return 'no momento o Teresina Hacker Clube encontra-se FECHADO! '+(u'\U0001f615')
+			return ' no momento o Teresina Hacker Clube encontra-se FECHADO! '+(u'\U0001f615')
 		else:
-			return 'no momento o Teresina Hacker Clube encontra-se ABERTO! '+(u'\U0001f603')
+			return ' no momento o Teresina Hacker Clube encontra-se ABERTO! '+(u'\U0001f603')
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar o status do THC!'
 
@@ -78,9 +78,6 @@ def get_eventos():
 		txt = ''
 		for i in output:
 			txt = txt+" "+u'\U0001f449'+" "+i+"\n" if not '<strike>' in i else ""
-		# result = output[0].replace("<ul>","").replace("</ul>","").replace("<strike>", u'\u2705'+" ")
-		# result = result.replace("<li>","  "+u'\U0001f449'+" ")
-		# return result.replace("</strike>","").replace("</li>", "")
 		return txt
 	except urllib.error.HTTPError:
 		return 'Ocorreu um erro ao tentar verificar os eventos do THC!'
