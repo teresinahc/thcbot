@@ -53,7 +53,7 @@ async def on_chat_message(msg):
                      [KeyboardButton(text='Projetos')],
                      [KeyboardButton(text='Agenda Semanal')],
                      [KeyboardButton(text='Próximos Eventos')]
-                 ], resize_keyboard=True, one_time_keyboard=True, selective=True)  
+                 ], resize_keyboard=True, one_time_keyboard=True, selective=True)
         else:
             markup = InlineKeyboardMarkup(inline_keyboard=[
                      [InlineKeyboardButton(text='Status (Aberto/Fechado)', callback_data='Status (Aberto/Fechado)')],
@@ -101,17 +101,17 @@ async def reply_querys(chat_id, first_name, query_data, query_id=None):
         await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, eventos do Teresina Hacker Clube:\n" + get_eventos(), parse_mode='HTML', reply_markup=ReplyKeyboardHide())
 
 
+if __name__ == '__main__'
+    BOT_ID = settings.BOT_ID   # Coloque aqui o id do seu bot, utilizado pra detectar quando ele é adicionado em algum grupo
 
-BOT_ID = settings.BOT_ID   # Coloque aqui o id do seu bot, utilizado pra detectar quando ele é adicionado em algum grupo
+    TOKEN = settings.TELEGRAM_API_KEY  # Pega a token via linha de comando!
 
-TOKEN = settings.TELEGRAM_API_KEY  # Pega a token via linha de comando!
+    bot = telepot.async.Bot(TOKEN)
+    answerer = telepot.async.helper.Answerer(bot)
 
-bot = telepot.async.Bot(TOKEN)
-answerer = telepot.async.helper.Answerer(bot)
+    loop = asyncio.get_event_loop()
+    loop.create_task(bot.message_loop({'chat': on_chat_message,
+                                       'callback_query': on_callback_query}))
+    print('THCbot iniciado! <3')
 
-loop = asyncio.get_event_loop()
-loop.create_task(bot.message_loop({'chat': on_chat_message,
-                                   'callback_query': on_callback_query}))
-print('THCbot iniciado! <3')
-
-loop.run_forever()
+    loop.run_forever()
