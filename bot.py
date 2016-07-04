@@ -101,7 +101,7 @@ async def reply_querys(chat_id, first_name, query_data, query_id=None):
         await bot.sendMessage(chat_id,"<strong>" + first_name + "</strong>, eventos do Teresina Hacker Clube:\n" + get_eventos(), parse_mode='HTML', reply_markup=ReplyKeyboardHide())
 
 
-if __name__ == '__main__'
+if __name__ == '__main__':
     BOT_ID = settings.BOT_ID   # Coloque aqui o id do seu bot, utilizado pra detectar quando ele é adicionado em algum grupo
 
     TOKEN = settings.TELEGRAM_API_KEY  # Pega a token via linha de comando!
